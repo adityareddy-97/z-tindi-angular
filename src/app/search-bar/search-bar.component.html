@@ -1,0 +1,23 @@
+<div class="box ">
+
+
+  <input class="form-control " type="text" placeholder="Type any location" #searchBox [formControl]="queryField"
+    (focus)="OnFocus(searchBox.value)" (clickOutside)="OnClickOutside($event)" [excludeBeforeClick]="true"
+    [exclude]="'ul,#suggest'">
+
+
+
+  <div *ngIf="displayList ">
+    <ul class="list-group typeAhead" *ngIf=" locations.length>0" id="suggest">
+
+      <li *ngFor="let location of locations" class="list-group-item">
+        <a [routerLink]="['/location',location.entity_id,location.entity_type]" (click)="OnClick($event)"
+          class="text-reset">
+          {{location.title}}
+        </a>
+      </li>
+
+    </ul>
+  </div>
+
+</div>

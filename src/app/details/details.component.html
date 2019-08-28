@@ -1,0 +1,74 @@
+<ngx-spinner bdOpacity=0.9 bdColor="none" size="large" color="#3434b8" type="line-scale-pulse-out-rapid"
+  [fullScreen]="false">
+  <p style="color: darkslateblue"> Loading... </p>
+</ngx-spinner>
+
+
+
+<div class="container ">
+  <div class="row p-3  text-center">
+
+    <h1 class="mx-auto col-12">{{restData?.name}} </h1>
+
+    <img *ngIf="restData?.featured_image" src="{{restData?.featured_image}}" class="mx-auto col-12 fit"  alt=" image">
+
+
+  </div>
+
+  <div class="row mt-5 mx-auto ">
+    <div class="col-sm-3">
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active" id="v-pills-overview-tab" data-toggle="pill" href="#v-pills-overview" role="tab"
+          aria-controls="v-pills-overview" aria-selected="true">Overview</a>
+        <a class="nav-link" id="v-pills-review-tab" data-toggle="pill" href="#v-pills-review" role="tab"
+          aria-controls="v-pills-review" aria-selected="false">Review</a>
+
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <div class="tab-content" id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="v-pills-overview" role="tabpanel"
+          aria-labelledby="v-pills-overview-tab">
+          <div class="row" style="text-align: center">
+            <div class="col-md-5">
+              <p><strong>Cuisines: </strong> {{restData?.cuisines}}</p>
+              <p><strong>Average cost for two: </strong>{{restData?.currency}}{{restData?.average_cost_for_two}}</p>
+              <p><strong>User Rating: </strong>{{restData?.user_rating?.aggregate_rating}}</p>
+              <p><strong>Timings: </strong>{{restData?.timings}}</p>
+            </div>
+            <div class="col-md-7">
+              <p><strong>Address: </strong>{{restData?.location?.address}}</p>
+              <agm-map *ngIf="lat && long" [latitude]="lat" [longitude]="long" [zoom]="zoom">
+                <agm-marker [latitude]="lat" [longitude]="long"></agm-marker>
+              </agm-map>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="v-pills-review" role="tabpanel" aria-labelledby="v-pills-review-tab">
+
+          <div *ngIf="reviewData?.length>0; else noReviews">
+            <div *ngFor="let review of reviewData">
+              <div class="media my-2">
+                <img src="{{review.review.user.profile_image}}" class="rounded-circle mr-3" alt="...">
+                <div class="media-body">
+                  <h5 class="mt-0">{{review.review.user.name}}</h5>
+                  <small>{{review.review.review_time_friendly}}</small>
+                  <p>{{review.review.review_text}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <ng-template #noReviews>
+            <h3>No Reviews</h3>
+          </ng-template>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+</div>

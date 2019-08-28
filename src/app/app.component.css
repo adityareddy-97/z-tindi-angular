@@ -1,0 +1,19 @@
+
+nav a{
+    font-size: 2.5rem;
+    font-family: 'Luckiest Guy', cursive;
+}
+
+.sticky{
+    top : 500px;
+    
+    position: sticky;
+    position: -webkit-sticky;
+    
+}
+
+.sticky-top{
+    top:500px;
+    width: 100%;
+   
+}
